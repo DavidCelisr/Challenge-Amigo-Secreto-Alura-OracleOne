@@ -15,6 +15,13 @@ function agregarAmigo() {
         return;
     } 
     
+    // Si ya se ha sorteado antes, reiniciar todo
+    if (document.getElementById("resultado").innerHTML !== "") {
+        nombreAmigo = [];  // Reiniciar la lista
+        document.getElementById("resultado").innerHTML = "";  // Borrar el resultado
+        renderizaAmigos(); // Limpiar la lista en pantalla
+    }
+
     nombreAmigo.push(inputIngresoAmigo);
     console.log(nombreAmigo);
     renderizaAmigos();
@@ -41,9 +48,26 @@ function limpiar() {
 
 
 //funcion sortear amigos 
+function sortearAmigos() {
+    if (nombreAmigo.length === 0) {
+        alert("Por favor, ingrese al menos un amigo.");
+        return;
+    }
+    
+    let amigosSorteados = nombreAmigo[Math.floor(Math.random() * nombreAmigo.length)];
+    let resultadoMostrar = document.getElementById("resultado");
+    resultadoMostrar.innerHTML = `El amigo sorteado es: ${amigosSorteados}`;  
+
+    resetearLista();
+}
 
 
-
+//funcion resetear lista
+function resetearLista() {
+    nombreAmigo = [];
+    renderizaAmigos();
+    document.getElementById("listaAmigos").innerHTML = "";
+}
 
 
 
